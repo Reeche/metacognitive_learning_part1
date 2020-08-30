@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--    {% load static %}-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>{% block title %}{% endblock title %}</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<!--    <link href="../static/css/style.css" rel="stylesheet" type="css" media="screen,projection"/>-->
+<!--    <link href="https://mpistaticfiles.s3.eu-west-2.amazonaws.com/static/css/style.css" rel="stylesheet" type="css" media="screen,projection"/>-->
+    {% block top_js_css %}{% endblock top_js_css %}
+</head>
+<body>
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="{% url 'index' %}" class="brand-logo">MPI-Assignment</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li><a class="navbar-link" href="{% url 'signup' %}">Signup</a></li>
+            <li><a class="navbar-link" href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+
+        <ul id="nav-mobile" class="sidenav">
+            {# Home Link / Admin Link / Register Link#}
+            <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
+            {# Some logic on what to display for last item#}
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li><a class="navbar-link" href="{% url 'signup' %}">Signup</a></li>
+            <li><a class="navbar-link" href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+</nav>
+
+<div class="container">
+    {% block content %}
+    {% endblock content %}
+</div>
+
+<footer class="page-footer orange">
+    <div class="footer-copyright">
+        <div class="container">
+            Made by <a class="orange-text text-lighten-3" href="https://github.com/Reeche">Ruiqi He</a>
+        </div>
+    </div>
+</footer>
+
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+</script>
+{% block bottom_js_css %}{% endblock bottom_js_css %}
+
+</body>
+</html>

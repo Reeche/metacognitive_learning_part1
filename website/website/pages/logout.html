@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Logout{% endblock %}
+
+{% block content %}
+<div class="section no-pad-bot" id="index-banner">
+    {% csrf_token %}
+    <div class="container">
+        <br><br>
+        <p class="flow-text">Goodbye</p>
+        <p class="flow-text">You successfully logged out.</p>
+        <br><br>
+    </div>
+</div>
+{% endblock %}
